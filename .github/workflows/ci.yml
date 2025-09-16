@@ -32,7 +32,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Generate Prisma Client
         run: pnpm --filter api exec prisma generate
@@ -64,7 +64,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Generate Prisma Client
         run: pnpm --filter api exec prisma generate
@@ -94,7 +94,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Generate Prisma Client
         run: pnpm --filter api exec prisma generate
@@ -132,7 +132,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Run security audit
         run: pnpm audit --audit-level moderate
