@@ -114,15 +114,12 @@ jobs:
 
       - name: Deploy to Heroku (Production)
         if: github.ref == 'refs/heads/main'
-        uses: akhileshns/heroku-deploy@v3.13.15
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_PRODUCTION_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          appdir: "apps/api"
-          usedocker: false
-          dontautocreate: true
-          buildpack: "heroku/nodejs"
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git subtree split --prefix=apps/api -b heroku-deploy
+          git push -f https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_PRODUCTION_APP_NAME }}.git heroku-deploy:main
+          git branch -D heroku-deploy
 
   cleanup-preview:
     name: Cleanup Preview Deployments
