@@ -60,7 +60,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./apps/web
-          vercel-args: '--prod'
+          vercel-args: '--prod --build-env NEXT_PUBLIC_API_URL=https://quizztok-api-prod-944bf6f2bb0c.herokuapp.com --build-env NEXT_PUBLIC_WS_URL=wss://quizztok-api-prod-944bf6f2bb0c.herokuapp.com'
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
   deploy-backend:
@@ -114,13 +114,15 @@ jobs:
 
       - name: Deploy to Heroku (Production)
         if: github.ref == 'refs/heads/main'
-        uses: akhileshns/heroku-deploy@v3.12.14
+        uses: akhileshns/heroku-deploy@v3.13.15
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_PRODUCTION_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           appdir: "apps/api"
           usedocker: false
+          dontautocreate: true
+          buildpack: "heroku/nodejs"
 
   cleanup-preview:
     name: Cleanup Preview Deployments

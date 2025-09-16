@@ -5,7 +5,7 @@
   "logo": "https://node-js-sample.herokuapp.com/node.png",
   "keywords": ["node", "nestjs", "typescript", "postgresql", "redis"],
   "image": "heroku/nodejs",
-  "stack": "heroku-22",
+  "stack": "heroku-24",
   "buildpacks": [
     {
       "url": "heroku/nodejs"
@@ -42,7 +42,7 @@
     },
     "CORS_ORIGIN": {
       "description": "CORS allowed origins",
-      "value": "https://quizztok.vercel.app"
+      "value": "https://final-one-gilt.vercel.app"
     },
     "TIKTOK_CLIENT_ID": {
       "description": "TikTok API client ID",
