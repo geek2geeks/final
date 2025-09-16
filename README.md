@@ -300,4 +300,4 @@ This is an active development project. Current focus:
 
 ---
 
-Built with ❤️ by the QuizzTok Team
+Built with ❤️ by the QuizzTok Team# QuizzTok Live - Production Ready
