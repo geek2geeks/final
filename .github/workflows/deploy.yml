@@ -60,7 +60,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./apps/web
-          vercel-args: '--prod --build-env NEXT_PUBLIC_API_URL=https://quizztok-api-prod-944bf6f2bb0c.herokuapp.com --build-env NEXT_PUBLIC_WS_URL=wss://quizztok-api-prod-944bf6f2bb0c.herokuapp.com'
+          vercel-args: '--prod --build-env NEXT_PUBLIC_API_URL=https://quizztok-api-prod.herokuapp.com --build-env NEXT_PUBLIC_WS_URL=wss://quizztok-api-prod.herokuapp.com'
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
   deploy-backend:
