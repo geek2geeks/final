@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Development-specific PostgreSQL configuration
+  postgres:
+    environment:
+      POSTGRES_DB: quizztok_dev
+      POSTGRES_USER: quizztok
+      POSTGRES_PASSWORD: dev_password_123
+    ports:
+      - "5432:5432"
+
+  # Development-specific Redis configuration
+  redis:
+    ports:
+      - "6379:6379"
+
+  # API Development Configuration
+  api:
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://quizztok:dev_password_123@postgres:5432/quizztok_dev
+      REDIS_URL: redis://:dev_redis_123@redis:6379
+      JWT_SECRET: dev_jwt_secret_key_change_in_production
+      LOG_LEVEL: debug
+      ENABLE_DOCS: "true"
+    command: pnpm run dev
+    volumes:
+      - ./apps/api:/app
+      - ./packages:/packages
+      - /app/node_modules
+
+  # Web Development Configuration
+  web:
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: https://localhost:3001
+      NEXTAUTH_URL: https://localhost:3000
+      NEXTAUTH_SECRET: dev_nextauth_secret_change_in_production
+    command: pnpm run dev
+    volumes:
+      - ./apps/web:/app
+      - ./packages:/packages
+      - /app/node_modules
+      - /app/.next

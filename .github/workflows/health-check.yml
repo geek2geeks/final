@@ -1,0 +1,48 @@
+name: Health Check
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    strategy:
+      matrix:
+        environment:
+          - name: "Production Frontend"
+            url: "https://quizztok.vercel.app"
+            expected_status: 200
+          - name: "Production API"
+            url: "https://quizztok-api-prod.herokuapp.com/health"
+            expected_status: 200
+          - name: "Staging API"
+            url: "https://quizztok-api-staging.herokuapp.com/health"
+            expected_status: 200
+
+    steps:
+      - name: Check ${{ matrix.environment.name }}
+        run: |
+          echo "🔍 Checking ${{ matrix.environment.name }} at ${{ matrix.environment.url }}"
+
+          response=$(curl -s -o /dev/null -w "%{http_code}" ${{ matrix.environment.url }})
+
+          if [ $response -eq ${{ matrix.environment.expected_status }} ]; then
+            echo "✅ ${{ matrix.environment.name }} is healthy (HTTP $response)"
+          else
+            echo "❌ ${{ matrix.environment.name }} is unhealthy (HTTP $response)"
+            exit 1
+          fi
+
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "🚨 Health check failed for ${{ matrix.environment.name }}"
+          echo "URL: ${{ matrix.environment.url }}"
+          echo "Expected: ${{ matrix.environment.expected_status }}"
+          echo "Actual: $response"

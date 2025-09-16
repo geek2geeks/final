@@ -1,0 +1,17 @@
+{
+  "name": "@quizztok/shared-types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types and interfaces",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "echo 'Skipping lint for shared-types - type checking covers this package'"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "name": "QuizzTok API",
+  "description": "NestJS backend for QuizzTok platform",
+  "repository": "https://github.com/your-org/quizztok",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "nestjs", "typescript", "postgresql", "redis"],
+  "image": "heroku/nodejs",
+  "stack": "heroku-22",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:essential-0",
+      "as": "DATABASE"
+    },
+    {
+      "plan": "heroku-redis:mini",
+      "as": "REDIS"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "PORT": {
+      "description": "Port number",
+      "value": "3001"
+    },
+    "JWT_SECRET": {
+      "description": "JWT secret key",
+      "generator": "secret"
+    },
+    "CORS_ORIGIN": {
+      "description": "CORS allowed origins",
+      "value": "https://quizztok.vercel.app"
+    },
+    "TIKTOK_CLIENT_ID": {
+      "description": "TikTok API client ID",
+      "required": false
+    },
+    "TIKTOK_CLIENT_SECRET": {
+      "description": "TikTok API client secret",
+      "required": false
+    }
+  },
+  "scripts": {
+    "postdeploy": "npx prisma migrate deploy && npx prisma generate"
+  },
+  "environments": {
+    "review": {
+      "addons": [
+        {
+          "plan": "heroku-postgresql:essential-0",
+          "as": "DATABASE"
+        },
+        {
+          "plan": "heroku-redis:mini",
+          "as": "REDIS"
+        }
+      ],
+      "env": {
+        "NODE_ENV": "staging"
+      }
+    },
+    "staging": {
+      "addons": [
+        {
+          "plan": "heroku-postgresql:essential-0",
+          "as": "DATABASE"
+        },
+        {
+          "plan": "heroku-redis:mini",
+          "as": "REDIS"
+        }
+      ],
+      "env": {
+        "NODE_ENV": "staging"
+      }
+    },
+    "production": {
+      "addons": [
+        {
+          "plan": "heroku-postgresql:standard-0",
+          "as": "DATABASE"
+        },
+        {
+          "plan": "heroku-redis:premium-0",
+          "as": "REDIS"
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

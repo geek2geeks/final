@@ -1,0 +1,59 @@
+{
+  "mcpServers": {
+    "time": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"],
+      "description": "Time and timezone utilities for scheduling and timestamps"
+    },
+    "redis": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-redis"],
+      "env": {
+        "REDIS_URL": "redis://:dev_redis_123@localhost:6379"
+      },
+      "description": "Redis cache and session management for QuizzTok"
+    },
+    "postgresql": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgresql"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://quizztok:dev_password_123@localhost:5432/quizztok_dev"
+      },
+      "description": "PostgreSQL database operations for QuizzTok development"
+    },
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-vercel"],
+      "env": {
+        "VERCEL_API_TOKEN": "${VERCEL_API_TOKEN}"
+      },
+      "description": "Vercel deployment and management for web frontend"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "./tools/mcp-config/playwright-browsers"
+      },
+      "description": "Browser automation and testing for E2E validation"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "env": {
+        "ALLOWED_DIRECTORIES": "./apps,./packages,./infrastructure,./tools,./docs"
+      },
+      "description": "File system operations within allowed project directories"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "description": "HTTP client for external API integrations"
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"],
+      "description": "Git operations for version control and worktree management"
+    }
+  }
+}
