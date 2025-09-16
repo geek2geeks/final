@@ -140,3 +140,9 @@ dump.rdb
 *.pem
 *.crt
 *.key
+
+# Secrets and credentials
+secrets.env
+SECRETS.md
+.secrets
+credentials.txt
